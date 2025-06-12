@@ -64,6 +64,9 @@ endif()
 
 # Now find required libraries, which may have been affected by externals
 if ( ${USE_WRF} )
+  message( STATUS "Finding WRF and necessary libraries..." )
+  list(APPEND CMAKE_MESSAGE_INDENT "  ")
+
   # PATHS will be checked last
   find_package( 
                 WRF 
@@ -76,6 +79,7 @@ if ( ${USE_WRF} )
                 QUIET
                 NO_CMAKE_ENVIRONMENT_PATH # Do not use _DIR option
                 )
+  list(POP_BACK CMAKE_MESSAGE_INDENT)
   if ( ${WRF_FOUND} )
     message( STATUS "Found WRF : ${WRF_CONFIG} (found version \"${WRF_VERSION}\")" )
   else()
